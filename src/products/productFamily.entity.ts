@@ -1,6 +1,3 @@
-import { ProductCategory } from '../productCategories/productCategory.entity';
-import { Product } from '../products/product.entity';
-import { AnswerReceipt } from '../receipt/answerReceipt.entity';
 import {
   Entity,
   Column,
@@ -12,6 +9,9 @@ import {
   JoinColumn,
   ManyToMany,
 } from 'typeorm';
+import { ProductCategory } from '../productCategories/productCategory.entity';
+import { Product } from './product.entity';
+import { AnswerReceipt } from '../receipt/answerReceipt.entity';
 
 @Entity()
 export class ProductFamily {

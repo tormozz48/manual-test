@@ -4,7 +4,6 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { ProductCategoriesModule } from './productCategories/productCategories.module';
 import { ProductsModule } from './products/products.module';
-import { ProductFamiliesModule } from './productFamilies/productFamilies.module';
 import { QuizzesModule } from './quizzes/quizzes.module';
 import { ReceiptModule } from './receipt/receipt.module';
 
@@ -21,7 +20,6 @@ import { ReceiptModule } from './receipt/receipt.module';
     }),
     ProductCategoriesModule,
     ProductsModule,
-    ProductFamiliesModule,
     QuizzesModule,
     ReceiptModule,
   ],

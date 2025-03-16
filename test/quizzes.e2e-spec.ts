@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { Server } from 'http';
-import { QuizDto } from 'src/quizzes/dto';
+import { QuizDto } from '../src/quizzes/dto';
 
 describe('QuizzesController (e2e)', () => {
   let app: INestApplication;
@@ -59,7 +59,7 @@ describe('QuizzesController (e2e)', () => {
       if (!firstQuestion) return; // Add null check to satisfy TypeScript
 
       expect(firstQuestion.name).toBe(
-        'Do you have difficulty getting or maintaining an erection?',
+        'Have you ever been diagnosed with erectile dysfunction?',
       );
       expect(firstQuestion.quizId).toBe(quiz.id);
 

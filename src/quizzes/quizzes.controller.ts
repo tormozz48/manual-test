@@ -44,7 +44,7 @@ export class QuizzesController {
       throw new NotFoundException('Quiz not found');
     }
     return this.receiptService.generateReceiptFromQuiz(
-      id,
+      quiz,
       body.answers.map((answer) => answer.id),
     );
   }

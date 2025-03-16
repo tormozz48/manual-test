@@ -6,4 +6,6 @@ export default new DataSource({
   database: join(__dirname, '..', 'data', 'database.sqlite'),
   entities: [join(__dirname, '**', '*.entity.{ts,js}')],
   migrations: [join(__dirname, 'migrations', '*.{ts,js}')],
+  logging: ['error', 'warn'],
+  logger: 'advanced-console',
 });

@@ -11,7 +11,7 @@ import {
 } from 'typeorm';
 import { Answer } from '../quizzes/answer.entity';
 import { Product } from '../products/product.entity';
-import { ProductFamily } from '../productFamilies/productFamily.entity';
+import { ProductFamily } from '../products/productFamily.entity';
 
 @Entity()
 export class AnswerReceipt {

@@ -1,37 +1,68 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Product } from '../products/product.entity';
 import { QuizResultDto } from '../quizzes/dto/quizResult.dto';
 import { ProductDto } from '../products/dto/product.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { AnswerReceipt } from '../receipt/answerReceipt.entity';
+import { Repository } from 'typeorm/repository/Repository';
+import { In } from 'typeorm';
+import { Quiz } from '../quizzes/quiz.entity';
+import { ProductCategoriesService } from '../productCategories/productCategories.service';
+import { ProductFamilyDto } from '../products/dto/productFamily.dto';
+import { ProductFamily } from '../products/productFamily.entity';
 
 @Injectable()
 export class ReceiptService {
-  constructor() {}
+  constructor(
+    @InjectRepository(AnswerReceipt)
+    private answerReceiptRepository: Repository<AnswerReceipt>,
+    private productCategoriesService: ProductCategoriesService,
+  ) {}
 
   async generateReceiptFromQuiz(
-    quizId: number,
+    quiz: Quiz,
     answerIds: number[],
   ): Promise<QuizResultDto> {
-    console.log(answerIds);
+    const category = await this.productCategoriesService.findOne(
+      quiz.categoryId,
+    );
+    if (!category) {
+      throw new NotFoundException('Category not found');
+    }
 
-    // Add await to make this truly async
-    const recommendedProducts = await Promise.resolve([]);
+    const answerReceipts = await this.answerReceiptRepository.find({
+      where: { id: In(answerIds) },
+      relations: ['products', 'excludes'],
+    });
+    const needExludeAll = answerReceipts.some(
+      (answerReceipt) => answerReceipt.excludeAll,
+    );
+    if (needExludeAll) {
+      return {
+        id: quiz.id,
+        products: [],
+        excludes: category.productFamilies.map((family) =>
+          this.mapToProductFamilyDto(family),
+        ),
+      };
+    }
 
-    // Map products to DTOs
-    const productDtos = recommendedProducts.map((product) =>
-      this.mapToProductDto(product),
+    const productDtos = answerReceipts.flatMap((answerReceipt) =>
+      answerReceipt.products.map((product) => this.mapToProductDto(product)),
+    );
+    const excludeDtos = answerReceipts.flatMap((answerReceipt) =>
+      answerReceipt.excludes.map((productFamily) =>
+        this.mapToProductFamilyDto(productFamily),
+      ),
     );
 
     return {
-      id: quizId,
+      id: quiz.id,
       products: productDtos,
+      excludes: excludeDtos,
     };
   }
 
-  /**
-   * Map a Product entity to a ProductDto
-   * @param product The product entity
-   * @returns A ProductDto
-   */
   private mapToProductDto(product: Product): ProductDto {
     return {
       id: product.id,
@@ -40,6 +71,17 @@ export class ReceiptService {
       unit: product.unit,
       categoryId: product.categoryId,
       familyId: product.familyId,
+    };
+  }
+
+  private mapToProductFamilyDto(
+    productFamily: ProductFamily,
+  ): ProductFamilyDto {
+    return {
+      id: productFamily.id,
+      code: productFamily.code,
+      name: productFamily.name,
+      categoryId: productFamily.categoryId,
     };
   }
 }

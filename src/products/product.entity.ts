@@ -9,7 +9,7 @@ import {
   ManyToMany,
 } from 'typeorm';
 import { ProductCategory } from '../productCategories/productCategory.entity';
-import { ProductFamily } from '../productFamilies/productFamily.entity';
+import { ProductFamily } from './productFamily.entity';
 import { AnswerReceipt } from '../receipt/answerReceipt.entity';
 
 @Entity()

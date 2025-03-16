@@ -7,7 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Product } from '../products/product.entity';
-import { ProductFamily } from '../productFamilies/productFamily.entity';
+import { ProductFamily } from '../products/productFamily.entity';
 import { Quiz } from '../quizzes/quiz.entity';
 
 @Entity()

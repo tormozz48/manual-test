@@ -10,6 +10,13 @@ export class ProductCategoriesService {
     private productCategoriesRepository: Repository<ProductCategory>,
   ) {}
 
+  findOne(id: number): Promise<ProductCategory | null> {
+    return this.productCategoriesRepository.findOne({
+      where: { id },
+      relations: ['productFamilies'],
+    });
+  }
+
   findByCode(code: string): Promise<ProductCategory | null> {
     return this.productCategoriesRepository.findOneBy({ code });
   }

@@ -17,6 +17,6 @@ import { Product } from '../products/product.entity';
   ],
   providers: [QuizzesService],
   controllers: [QuizzesController],
-  exports: [QuizzesService],
+  exports: [],
 })
 export class QuizzesModule {}
