@@ -41,6 +41,15 @@ npm run start:prod
 
 By default, the application will start on port 3001. You can access it at [http://localhost:3001](http://localhost:3001).
 
+## Database Integration
+
+This project uses SQLite with TypeORM for database operations:
+
+- **SQLite**: A lightweight, file-based database that requires no separate server
+- **TypeORM**: An ORM that can run in Node.js and supports TypeScript
+
+The database file is stored in the `data/` directory as `database.sqlite`. The application is configured to automatically create the database schema based on the entity definitions.
+
 ## Running Tests
 
 This project includes both unit tests and end-to-end tests:
