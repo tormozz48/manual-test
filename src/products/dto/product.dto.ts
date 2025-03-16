@@ -3,6 +3,7 @@ export class ProductDto {
   name: string;
   doze: number;
   unit: string;
+  title: string;
   categoryId: number;
   familyId: number | null;
 }

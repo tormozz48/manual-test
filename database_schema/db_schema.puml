@@ -1,0 +1,112 @@
+@startuml Database Schema
+
+' Use modern styling
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <b>x</b>
+!define foreign_key(x) <u>x</u>
+!define unique(x) <i>x</i>
+!define not_null(x) <b>x</b>
+
+' Color scheme
+skinparam class {
+  BackgroundColor #ECECEC
+  ArrowColor #2C3E50
+  BorderColor #2C3E50
+}
+
+' Product Category Table
+table(product_category) {
+  primary_key(id) : INTEGER
+  unique(code) : VARCHAR
+  name : VARCHAR
+  createdAt : DATETIME
+  updatedAt : DATETIME
+}
+
+' Product Family Table
+table(product_family) {
+  primary_key(id) : INTEGER
+  unique(code) : VARCHAR
+  name : VARCHAR
+  foreign_key(categoryId) : INTEGER
+  createdAt : DATETIME
+  updatedAt : DATETIME
+}
+
+' Products Table
+table(product) {
+  primary_key(id) : INTEGER
+  name : VARCHAR
+  doze : INTEGER
+  unit : VARCHAR
+  foreign_key(categoryId) : INTEGER
+  foreign_key(familyId) : INTEGER
+  createdAt : DATETIME
+  updatedAt : DATETIME
+}
+
+' Quiz Table
+table(quiz) {
+  primary_key(id) : INTEGER
+  name : VARCHAR
+  foreign_key(categoryId) : INTEGER
+  createdAt : DATETIME
+  updatedAt : DATETIME
+}
+
+' Questions Table
+table(question) {
+  primary_key(id) : INTEGER
+  code : VARCHAR
+  name : VARCHAR
+  foreign_key(quizId) : INTEGER
+  createdAt : DATETIME
+  updatedAt : DATETIME
+}
+
+' Answers Table
+table(answer) {
+  primary_key(id) : INTEGER
+  name : VARCHAR
+  foreign_key(questionId) : INTEGER
+  foreign_key(nextQuestionId) : INTEGER (nullable)
+  createdAt : DATETIME
+  updatedAt : DATETIME
+}
+
+' Answer Receipts Table
+table(answer_receipt) {
+  primary_key(id) : INTEGER
+  excludeAll : BOOLEAN
+  foreign_key(answerId) : INTEGER (unique)
+  createdAt : DATETIME
+  updatedAt : DATETIME
+}
+
+' Junction table for answer_receipts and products
+table(answer_receipt_products) {
+  primary_key(answerReceiptId) : INTEGER
+  primary_key(productId) : INTEGER
+}
+
+' Junction table for answer_receipts and product_families
+table(answer_receipt_product_families) {
+  primary_key(answerReceiptId) : INTEGER
+  primary_key(productFamilyId) : INTEGER
+}
+
+' Relationships
+product_category "1" -- "many" product_family : has >
+product_category "1" -- "many" product : contains >
+product_family "1" -- "many" product : groups >
+product_category "1" -- "many" quiz : has >
+
+quiz "1" -- "many" question : contains >
+question "1" -- "many" answer : has >
+answer "0..1" -- "0..1" question : leads to >
+answer "1" -- "0..1" answer_receipt : has >
+
+answer_receipt "many" -- "many" product : recommends
+answer_receipt "many" -- "many" product_family : excludes
+
+@enduml

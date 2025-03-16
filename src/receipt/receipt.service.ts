@@ -69,6 +69,7 @@ export class ReceiptService {
       name: product.name,
       doze: product.doze,
       unit: product.unit,
+      title: `${product.name} ${product.doze}${product.unit}`,
       categoryId: product.categoryId,
       familyId: product.familyId,
     };

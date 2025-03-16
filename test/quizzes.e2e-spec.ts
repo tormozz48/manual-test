@@ -196,6 +196,8 @@ describe('QuizzesController (e2e)', () => {
           expect(product.name).toBeDefined();
           expect(product.doze).toBeDefined();
           expect(product.unit).toBeDefined();
+          expect(product.title).toBeDefined();
+          expect(product.title).toBe(`${product.name} ${product.doze}${product.unit}`);
           expect(product.categoryId).toBeDefined();
           expect(product.familyId).toBeDefined();
         }
