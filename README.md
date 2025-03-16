@@ -49,6 +49,10 @@ npm run start:prod
 
 By default, the application will start on port 3001. You can access it at [http://localhost:3001](http://localhost:3001).
 
+### API Documentation
+
+The API documentation is available at [http://localhost:3001/api/docs](http://localhost:3001/api/docs).
+
 ## Database Schema
 
 The database schema is defined in the [database schema](database_schema/db_schema.puml) file.
