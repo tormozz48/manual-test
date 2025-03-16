@@ -8,7 +8,6 @@ import {
 } from '@nestjs/common';
 import { QuizzesService } from './quizzes.service';
 import { ReceiptService } from '../receipt/receipt.service';
-import { Quiz } from './quiz.entity';
 import { QuizDto } from './dto';
 import { QuizSubmitDto } from './dto/quizSubmit.dto';
 import { QuizResultDto } from './dto/quizResult.dto';
@@ -19,11 +18,6 @@ export class QuizzesController {
     private readonly quizzesService: QuizzesService,
     private readonly receiptService: ReceiptService,
   ) {}
-
-  @Get()
-  findAll(): Promise<Quiz[]> {
-    return this.quizzesService.findAll();
-  }
 
   @Get('category/:code')
   async findByCategory(@Param('code') categoryCode: string): Promise<QuizDto> {

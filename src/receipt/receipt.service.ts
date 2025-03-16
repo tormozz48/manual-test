@@ -7,7 +7,7 @@ import { AnswerReceipt } from '../receipt/answerReceipt.entity';
 import { Repository } from 'typeorm/repository/Repository';
 import { In } from 'typeorm';
 import { Quiz } from '../quizzes/quiz.entity';
-import { ProductCategoriesService } from '../productCategories/productCategories.service';
+import { ProductCategoriesService } from '../products/productCategories.service';
 import { ProductFamilyDto } from '../products/dto/productFamily.dto';
 import { ProductFamily } from '../products/productFamily.entity';
 

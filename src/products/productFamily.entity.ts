@@ -9,7 +9,7 @@ import {
   JoinColumn,
   ManyToMany,
 } from 'typeorm';
-import { ProductCategory } from '../productCategories/productCategory.entity';
+import { ProductCategory } from './productCategory.entity';
 import { Product } from './product.entity';
 import { AnswerReceipt } from '../receipt/answerReceipt.entity';
 

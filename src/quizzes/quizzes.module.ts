@@ -5,14 +5,13 @@ import { Question } from './question.entity';
 import { Answer } from './answer.entity';
 import { QuizzesService } from './quizzes.service';
 import { QuizzesController } from './quizzes.controller';
-import { ProductCategoriesModule } from '../productCategories/productCategories.module';
 import { ReceiptModule } from '../receipt/receipt.module';
-import { Product } from '../products/product.entity';
+import { ProductsModule } from '../products/products.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Quiz, Question, Answer, Product]),
-    ProductCategoriesModule,
+    TypeOrmModule.forFeature([Quiz, Question, Answer]),
+    ProductsModule,
     ReceiptModule,
   ],
   providers: [QuizzesService],

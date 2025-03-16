@@ -1,4 +1,4 @@
-import { ProductCategory } from '../productCategories/productCategory.entity';
+import { ProductCategory } from '../products/productCategory.entity';
 import {
   Entity,
   Column,

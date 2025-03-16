@@ -5,7 +5,7 @@ import { Quiz } from './quiz.entity';
 import { Question } from './question.entity';
 import { Answer } from './answer.entity';
 import { QuizDto, QuestionDto, AnswerDto } from './dto';
-import { ProductCategoriesService } from '../productCategories/productCategories.service';
+import { ProductCategoriesService } from '../products/productCategories.service';
 
 @Injectable()
 export class QuizzesService {
@@ -14,12 +14,6 @@ export class QuizzesService {
     private quizzesRepository: Repository<Quiz>,
     private productCategoriesService: ProductCategoriesService,
   ) {}
-
-  async findAll(): Promise<Quiz[]> {
-    return this.quizzesRepository.find({
-      relations: ['category'],
-    });
-  }
 
   async findOne(id: number): Promise<Quiz | null> {
     return this.quizzesRepository.findOne({
