@@ -14,7 +14,7 @@ import { ProductFamiliesModule } from './productFamilies/productFamilies.module'
       type: 'sqlite',
       database: join(__dirname, '..', 'data', 'database.sqlite'),
       entities: [join(__dirname, '**', '*.entity.{ts,js}')],
-      synchronize: true,
+      synchronize: false,
       autoLoadEntities: true,
       migrations: [join(__dirname, 'migrations', '*.{ts,js}')],
       migrationsRun: process.env.NODE_ENV === 'production',
