@@ -1,5 +1,5 @@
-import { ProductCategory } from 'src/productCategories/productCategory.entity';
-import { Product } from 'src/products/product.entity';
+import { ProductCategory } from '../productCategories/productCategory.entity';
+import { Product } from '../products/product.entity';
 import {
   Entity,
   Column,

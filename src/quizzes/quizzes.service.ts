@@ -5,7 +5,7 @@ import { Quiz } from './quiz.entity';
 import { Question } from './question.entity';
 import { Answer } from './answer.entity';
 import { QuizDto, QuestionDto, AnswerDto } from './dto';
-import { ProductCategoriesService } from 'src/productCategories/productCategories.service';
+import { ProductCategoriesService } from '../productCategories/productCategories.service';
 
 @Injectable()
 export class QuizzesService {
