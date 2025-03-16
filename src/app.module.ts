@@ -6,6 +6,7 @@ import { ProductCategoriesModule } from './productCategories/productCategories.m
 import { ProductsModule } from './products/products.module';
 import { ProductFamiliesModule } from './productFamilies/productFamilies.module';
 import { QuizzesModule } from './quizzes/quizzes.module';
+import { ReceiptModule } from './receipt/receipt.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { QuizzesModule } from './quizzes/quizzes.module';
     ProductsModule,
     ProductFamiliesModule,
     QuizzesModule,
+    ReceiptModule,
   ],
   controllers: [AppController],
   providers: [],

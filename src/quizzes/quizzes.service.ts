@@ -21,6 +21,12 @@ export class QuizzesService {
     });
   }
 
+  async findOne(id: number): Promise<Quiz | null> {
+    return this.quizzesRepository.findOne({
+      where: { id },
+    });
+  }
+
   async findByCategory(categoryCode: string): Promise<QuizDto | null> {
     const category =
       await this.productCategoriesService.findByCode(categoryCode);

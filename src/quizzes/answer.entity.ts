@@ -6,8 +6,10 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToOne,
 } from 'typeorm';
 import { Question } from './question.entity';
+import { AnswerReceipt } from '../receipt/answerReceipt.entity';
 
 @Entity()
 export class Answer {
@@ -30,6 +32,9 @@ export class Answer {
 
   @Column({ nullable: true })
   nextQuestionId: number;
+
+  @OneToOne('AnswerReceipt', 'answer', { nullable: true })
+  receipt: AnswerReceipt;
 
   @CreateDateColumn()
   createdAt: Date;

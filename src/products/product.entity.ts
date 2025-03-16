@@ -6,9 +6,11 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  ManyToMany,
 } from 'typeorm';
 import { ProductCategory } from '../productCategories/productCategory.entity';
 import { ProductFamily } from '../productFamilies/productFamily.entity';
+import { AnswerReceipt } from '../receipt/answerReceipt.entity';
 
 @Entity()
 export class Product {
@@ -24,19 +26,22 @@ export class Product {
   @Column()
   unit: string;
 
-  @ManyToOne(() => ProductCategory, (category) => category.products)
+  @ManyToOne('ProductCategory', 'products')
   @JoinColumn({ name: 'categoryId' })
   category: ProductCategory;
 
   @Column()
   categoryId: number;
 
-  @ManyToOne(() => ProductFamily, (family) => family.products)
+  @ManyToOne('ProductFamily', 'products')
   @JoinColumn({ name: 'familyId' })
   family: ProductFamily;
 
   @Column({ nullable: true })
   familyId: number;
+
+  @ManyToMany('AnswerReceipt', 'products')
+  answerReceipts: AnswerReceipt[];
 
   @CreateDateColumn()
   createdAt: Date;

@@ -6,11 +6,14 @@ import { Answer } from './answer.entity';
 import { QuizzesService } from './quizzes.service';
 import { QuizzesController } from './quizzes.controller';
 import { ProductCategoriesModule } from '../productCategories/productCategories.module';
+import { ReceiptModule } from '../receipt/receipt.module';
+import { Product } from '../products/product.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Quiz, Question, Answer]),
+    TypeOrmModule.forFeature([Quiz, Question, Answer, Product]),
     ProductCategoriesModule,
+    ReceiptModule,
   ],
   providers: [QuizzesService],
   controllers: [QuizzesController],

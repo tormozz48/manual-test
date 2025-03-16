@@ -1,5 +1,6 @@
 import { ProductCategory } from '../productCategories/productCategory.entity';
 import { Product } from '../products/product.entity';
+import { AnswerReceipt } from '../receipt/answerReceipt.entity';
 import {
   Entity,
   Column,
@@ -9,6 +10,7 @@ import {
   ManyToOne,
   OneToMany,
   JoinColumn,
+  ManyToMany,
 } from 'typeorm';
 
 @Entity()
@@ -31,6 +33,9 @@ export class ProductFamily {
 
   @OneToMany('Product', 'family')
   products: Product[];
+
+  @ManyToMany('AnswerReceipt', 'excludes')
+  answerReceipts: AnswerReceipt[];
 
   @CreateDateColumn()
   createdAt: Date;
