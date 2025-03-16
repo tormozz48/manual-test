@@ -38,7 +38,8 @@ export class ProductDto {
   categoryId: number;
 
   @ApiProperty({
-    description: 'ID of the product family this product belongs to, or null if not part of a family',
+    description:
+      'ID of the product family this product belongs to, or null if not part of a family',
     example: 1,
     nullable: true,
   })
