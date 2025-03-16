@@ -42,7 +42,7 @@ export class FillData1710575200000 implements MigrationInterface {
           ('Sildenafil', 100, 'mg', ${categoryId}, ${sildenafilFamilyId}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), 
           ('Tadalafil', 10, 'mg', ${categoryId}, ${tadalafilFamilyId}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
           ('Tadalafil', 20, 'mg', ${categoryId}, ${tadalafilFamilyId}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-        RETURNING id, name, doze
+        RETURNING id, name, doze  
       `)) as { id: number; name: string; doze: number }[];
 
     const sildenafil50 = products.find(
@@ -73,14 +73,14 @@ export class FillData1710575200000 implements MigrationInterface {
     await queryRunner.query(`
       INSERT INTO question (quizId, code, name, createdAt, updatedAt)
       VALUES 
-        (${quizId}, '1', 'Have you ever been diagnosed with erectile dysfunction?', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-        (${quizId}, '2', 'Have you ever taken medication for erectile dysfunction before?', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-        (${quizId}, '2a', 'Did Viagra or Sildenafil work for you?', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-        (${quizId}, '2b', 'Did Cialis or Tadalafil work for you?', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-        (${quizId}, '2c', 'Which medication would you prefer to try?', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-        (${quizId}, '3', 'Do you have any heart conditions?', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-        (${quizId}, '4', 'Are you currently taking any nitrates?', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-        (${quizId}, '5', 'Do you have any of the following conditions?', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+        (${quizId}, '1', 'Do you have difficulty getting or maintaining an erection?', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+        (${quizId}, '2', 'Have you tried any of the following treatments before?', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+        (${quizId}, '2a', 'Was the Viagra or Sildenafil product you tried before effective?', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+        (${quizId}, '2b', 'Was the Cialis or Tadalafil product you tried before effective?', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+        (${quizId}, '2c', 'Which is your preferred treatment?', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+        (${quizId}, '3', 'Do you have, or have you ever had, any heart or neurological conditions?', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+        (${quizId}, '4', 'Do any of the listed medical conditions apply to you?', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+        (${quizId}, '5', 'Are you taking any of the following drugs?', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
     `);
 
     // Get questions
@@ -127,7 +127,7 @@ export class FillData1710575200000 implements MigrationInterface {
       },
       {
         questionId: question2!.id,
-        name: 'Other',
+        name: 'Both',
         nextQuestionId: question2c!.id,
         excludeAll: false,
       },
@@ -207,63 +207,63 @@ export class FillData1710575200000 implements MigrationInterface {
       },
       {
         questionId: question4!.id,
-        name: 'Yes',
+        name: 'Significant liver problems (such as cirrhosis of the liver) or kidney problems',
         nextQuestionId: question5!.id,
         excludeAll: true,
       },
       {
         questionId: question4!.id,
-        name: 'No',
+        name: 'Currently prescribed GTN, Isosorbide mononitrate, Isosorbide dinitrate , Nicorandil (nitrates) or Rectogesic ointment',
         nextQuestionId: question5!.id,
         excludeAll: true,
       },
       {
         questionId: question4!.id,
-        name: 'I do not know',
+        name: 'Abnormal blood pressure (lower than 90/50 mmHg or higher than 160/90 mmHg)',
         nextQuestionId: question5!.id,
         excludeAll: true,
       },
       {
         questionId: question4!.id,
-        name: 'I would prefer not to say',
+        name: 'Condition affecting your penis (such as Peyronies Disease, previous injuries or an inability to retract your foreskin)',
         nextQuestionId: question5!.id,
         excludeAll: true,
       },
       {
         questionId: question4!.id,
-        name: 'Other',
+        name: 'I do not have any of these conditions',
         nextQuestionId: question5!.id,
-        excludeAll: true,
+        excludeAll: false,
       },
       {
         questionId: question5!.id,
-        name: 'Diabetes',
+        name: 'Alpha-blocker medication such as Alfuzosin, Doxazosin, Tamsulosin, Prazosin, Terazosin or over-the-counter Flomax',
         nextQuestionId: null,
         excludeAll: true,
       },
       {
         questionId: question5!.id,
-        name: 'High blood pressure',
+        name: 'Riociguat or other guanylate cyclase stimulators (for lung problems)',
         nextQuestionId: null,
         excludeAll: true,
       },
       {
         questionId: question5!.id,
-        name: 'Liver disease',
+        name: 'Saquinavir, Ritonavir or Indinavir (for HIV)',
         nextQuestionId: null,
         excludeAll: true,
       },
       {
         questionId: question5!.id,
-        name: 'Kidney disease',
+        name: 'Cimetidine (for heartburn)',
         nextQuestionId: null,
         excludeAll: true,
       },
       {
         questionId: question5!.id,
-        name: 'None of the above',
+        name: 'I do not take any of these drugs',
         nextQuestionId: null,
-        excludeAll: true,
+        excludeAll: false,
       },
     ];
 

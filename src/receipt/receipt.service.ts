@@ -31,7 +31,7 @@ export class ReceiptService {
     }
 
     const answerReceipts = await this.answerReceiptRepository.find({
-      where: { id: In(answerIds) },
+      where: { answerId: In(answerIds) },
       relations: ['products', 'excludes'],
     });
     const needExludeAll = answerReceipts.some(

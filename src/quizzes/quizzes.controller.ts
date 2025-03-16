@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  HttpCode,
   NotFoundException,
   Param,
   Post,
@@ -29,6 +30,7 @@ export class QuizzesController {
   }
 
   @Post(':id/submit')
+  @HttpCode(200)
   async submit(
     @Param('id') id: number,
     @Body() body: QuizSubmitDto,
