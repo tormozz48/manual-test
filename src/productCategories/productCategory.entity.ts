@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { Product } from '../products/product.entity';
 import { ProductFamily } from '../productFamilies/productFamily.entity';
+import { Quiz } from '../quizzes/quiz.entity';
 
 @Entity()
 export class ProductCategory {
@@ -25,6 +26,9 @@ export class ProductCategory {
 
   @OneToMany(() => Product, (product) => product.category)
   products: Product[];
+
+  @OneToMany(() => Quiz, (quiz) => quiz.category)
+  quizzes: Quiz[];
 
   @CreateDateColumn()
   createdAt: Date;
